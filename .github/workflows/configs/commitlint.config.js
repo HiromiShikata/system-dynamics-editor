@@ -1,4 +1,4 @@
-export default {
+module.exports = {
   extends: ['@commitlint/config-conventional'],
   rules: {
     'type-enum': [
@@ -24,4 +24,4 @@ export default {
     'header-max-length': [0],
     'body-max-line-length': [0],
   },
-}
+};
