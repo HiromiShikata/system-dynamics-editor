@@ -222,7 +222,7 @@ jobs:
         if: github.event.pull_request.user.login != 'dependabot[bot]'
         with:
           exclude-branches: 'release/**, dependabot/**, project-common/**, renovate/**'
-          github-token: ${{ secrets.GH_TOKEN }}
+          github-token: ${{ github.token }}
           loose-matching: true
           skip-linked-issues-check-label: ''
       - name: Get the output
