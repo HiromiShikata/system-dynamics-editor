@@ -3,7 +3,7 @@
 // Direct edits in downstream repositories will be overwritten by the next sync.
 // Update the source file in HiromiShikata/repositories-management instead.
 
-module.exports = {
+export default {
   extends: ['@commitlint/config-conventional'],
   rules: {
     'type-enum': [
