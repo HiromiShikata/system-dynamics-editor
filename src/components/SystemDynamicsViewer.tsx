@@ -1,5 +1,5 @@
-import { SystemDynamicsLayoutCalculator } from '../domain/SystemDynamicsLayoutCalculator';
 import type { NodePosition } from '../domain/SystemDynamicsLayoutCalculator';
+import { SystemDynamicsLayoutCalculator } from '../domain/SystemDynamicsLayoutCalculator';
 import type { SystemDynamicsModel } from '../domain/SystemDynamicsModel';
 
 type Props = {
