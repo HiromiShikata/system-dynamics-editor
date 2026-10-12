@@ -30,3 +30,12 @@ describe('package-lock.json source-map-js resolved version', () => {
     expect(isSemverGreaterOrEqual(parseSemverTuple(resolvedVersion), [1, 2, 2])).toBe(true);
   });
 });
+
+describe('package-lock.json brace-expansion resolved version', () => {
+  it('is at or above 5.0.12, the version patching GHSA-q2hr-2g5m-vwhr', () => {
+    const packageLock = JSON.parse(readFileSync(packageLockJsonPath, 'utf-8')) as PackageLockFile;
+    const resolvedVersion = packageLock.packages['node_modules/brace-expansion'].version;
+
+    expect(isSemverGreaterOrEqual(parseSemverTuple(resolvedVersion), [5, 0, 12])).toBe(true);
+  });
+});
