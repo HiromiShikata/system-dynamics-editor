@@ -39,3 +39,21 @@ describe('package-lock.json brace-expansion resolved version', () => {
     expect(isSemverGreaterOrEqual(parseSemverTuple(resolvedVersion), [5, 0, 12])).toBe(true);
   });
 });
+
+describe('package-lock.json lucide-react resolved version', () => {
+  it('is at or above 1.55.0, the version targeted by the weekly dependency refresh', () => {
+    const packageLock = JSON.parse(readFileSync(packageLockJsonPath, 'utf-8')) as PackageLockFile;
+    const resolvedVersion = packageLock.packages['node_modules/lucide-react'].version;
+
+    expect(isSemverGreaterOrEqual(parseSemverTuple(resolvedVersion), [1, 55, 0])).toBe(true);
+  });
+});
+
+describe('package-lock.json vite resolved version', () => {
+  it('is at or above 8.3.4, the version targeted by the weekly dependency refresh', () => {
+    const packageLock = JSON.parse(readFileSync(packageLockJsonPath, 'utf-8')) as PackageLockFile;
+    const resolvedVersion = packageLock.packages['node_modules/vite'].version;
+
+    expect(isSemverGreaterOrEqual(parseSemverTuple(resolvedVersion), [8, 3, 4])).toBe(true);
+  });
+});
