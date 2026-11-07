@@ -57,3 +57,12 @@ describe('package-lock.json vite resolved version', () => {
     expect(isSemverGreaterOrEqual(parseSemverTuple(resolvedVersion), [8, 3, 4])).toBe(true);
   });
 });
+
+describe('package-lock.json storybook resolved version', () => {
+  it('is at or above 10.6.2, the version patching GHSA-f2ph-cmg5-wxc8 and GHSA-px85-f4q5-jh77', () => {
+    const packageLock = JSON.parse(readFileSync(packageLockJsonPath, 'utf-8')) as PackageLockFile;
+    const resolvedVersion = packageLock.packages['node_modules/storybook'].version;
+
+    expect(isSemverGreaterOrEqual(parseSemverTuple(resolvedVersion), [10, 6, 2])).toBe(true);
+  });
+});
