@@ -66,3 +66,32 @@ describe('package-lock.json storybook resolved version', () => {
     expect(isSemverGreaterOrEqual(parseSemverTuple(resolvedVersion), [10, 6, 2])).toBe(true);
   });
 });
+
+const resolvedCopiesOutsideNpm = (packageLock: PackageLockFile, packageName: string): string[] =>
+  Object.entries(packageLock.packages)
+    .filter(([key]) => !key.startsWith('node_modules/npm/') && key.endsWith(`node_modules/${packageName}`))
+    .map(([, entry]) => entry.version);
+
+describe('package-lock.json glob copies outside the bundled npm package', () => {
+  it('resolve every copy at or above 14.0.2, the version patching GHSA-3g3m-2fjr-6pw4', () => {
+    const packageLock = JSON.parse(readFileSync(packageLockJsonPath, 'utf-8')) as PackageLockFile;
+    const resolvedVersions = resolvedCopiesOutsideNpm(packageLock, 'glob');
+
+    expect(resolvedVersions.length).toBeGreaterThan(0);
+    for (const resolvedVersion of resolvedVersions) {
+      expect(isSemverGreaterOrEqual(parseSemverTuple(resolvedVersion), [14, 0, 2])).toBe(true);
+    }
+  });
+});
+
+describe('package-lock.json minimatch copies outside the bundled npm package', () => {
+  it('resolve every copy at or above 11.0.1, the version patching GHSA-g3hv-75wg-m249', () => {
+    const packageLock = JSON.parse(readFileSync(packageLockJsonPath, 'utf-8')) as PackageLockFile;
+    const resolvedVersions = resolvedCopiesOutsideNpm(packageLock, 'minimatch');
+
+    expect(resolvedVersions.length).toBeGreaterThan(0);
+    for (const resolvedVersion of resolvedVersions) {
+      expect(isSemverGreaterOrEqual(parseSemverTuple(resolvedVersion), [11, 0, 1])).toBe(true);
+    }
+  });
+});
